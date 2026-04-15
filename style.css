@@ -26,7 +26,7 @@ h1{
 }
 
 h2{
-    color: white;
+    color: black;
     margin-bottom: 30px;
     font-weight: 400;
 }
@@ -44,8 +44,5 @@ h2{
     margin-top: 20px;
 }
 
-#convertBtn {
-    background-color: #363636;
-}
 
 
