@@ -461,39 +461,67 @@
 // console.log("Язык по умолчанию:", defaultLanguage);
 
 
-const order = {
-  id: 101,
-  customer: { 
-    name: "Никита" 
-  },
-  shipping: {
-    address: { 
-        city: "Волжский" 
-    }
-  },
-  payment: {
-    method: "Карта",
-    status: "Оплачено"
+// const order = {
+//   id: 101,
+//   customer: { 
+//     name: "Никита" 
+//   },
+//   shipping: {
+//     address: { 
+//         city: "Волжский" 
+//     }
+//   },
+//   payment: {
+//     method: "Карта",
+//     status: "Оплачено"
+//   }
+// };
+
+// function displayOrder(obj) {
+//   console.log(`--- Заказ №${obj?.id ?? "???"} ---`);
+
+//   const name = obj?.customer?.name ?? "Гость";
+//   const city = obj?.shipping?.address?.city ?? "Не указан";
+//   const pay = obj?.payment?.method ?? "Не выбран";
+//   const status = obj?.payment?.status ?? "Ожидает";
+
+//   console.log(`Клиент: ${name}`);
+//   console.log(`Город: ${city}`);
+//   console.log(`Оплата: ${pay} (${status})`);
+//   console.log("-------------------------");
+// }
+
+
+// displayOrder(order);
+
+
+const rates = { USD: 0.013183, EUR: 0.011204, BYN: 0.037632 };
+
+async function convertCurrency() {
+  const inp = document.getElementById("amount");
+  const sel = document.getElementById("currency");
+  const res = document.getElementById("result");
+  const val = inp?.value;
+
+  if (!val || val <= 0) {
+    res.textContent = "Введите сумму";
+    return;
   }
-};
 
-function displayOrder(obj) {
-  console.log(`--- Заказ №${obj?.id ?? "???"} ---`);
+  try {
+    res.textContent = "Считаем...";
+    await new Promise(r => setTimeout(r, 500));
 
-  const name = obj?.customer?.name ?? "Гость";
-  const city = obj?.shipping?.address?.city ?? "Не указан";
-  const pay = obj?.payment?.method ?? "Не выбран";
-  const status = obj?.payment?.status ?? "Ожидает";
-
-  console.log(`Клиент: ${name}`);
-  console.log(`Город: ${city}`);
-  console.log(`Оплата: ${pay} (${status})`);
-  console.log("-------------------------");
+    const cur = sel?.value;
+    const rate = rates[cur] ?? 1;   
+    const total = Math.round(val * rate * 100) / 100;
+    res.textContent = `Итог: ${total} ${cur}`;
+  } catch (e) {
+    res.textContent = "Ошибка";
+  }
 }
 
-
-displayOrder(order);
-
+document.getElementById("convertBtn")?.addEventListener("click", convertCurrency);
 
 
 
