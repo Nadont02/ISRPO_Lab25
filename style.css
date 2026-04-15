@@ -26,7 +26,26 @@ h1{
 }
 
 h2{
-    color: #667eea;
+    color: white;
     margin-bottom: 30px;
     font-weight: 400;
 }
+
+.converter{
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+#result {
+    margin-top: 20px;
+}
+
+#convertBtn {
+    background-color: #363636;
+}
+
+
